@@ -963,7 +963,7 @@ section {
 	}
 
 	.product-info {
-		padding: 20px;
+		display: none;
 	}
 
 	.product-name {
