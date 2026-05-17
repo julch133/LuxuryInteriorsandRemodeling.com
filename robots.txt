@@ -1,0 +1,45 @@
+# robots.txt for luxuryinteriorsandremodeling.com
+# Purpose: allow legitimate search engines to crawl public marketing and SEO pages,
+# while keeping non-public/system files out of search results.
+
+User-agent: *
+Allow: /
+
+# Keep common system, source, and config files out of search results
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /node_modules/
+Disallow: /vendor/
+Disallow: /config/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /backup/
+Disallow: /backups/
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /test/
+Disallow: /tests/
+Disallow: /drafts/
+Disallow: /old/
+Disallow: /archive/
+
+# Block common files that should not be indexed if accidentally uploaded
+Disallow: /*.json$
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.env$
+Disallow: /*.bak$
+Disallow: /*.zip$
+Disallow: /*.tar$
+Disallow: /*.gz$
+
+# Allow important public assets
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /img/
+Allow: /SEO/
+
+# Tell crawlers where the XML sitemap is located
+Sitemap: https://luxuryinteriorsandremodeling.com/sitemap.xml
