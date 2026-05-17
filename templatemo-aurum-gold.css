@@ -1662,3 +1662,136 @@ section {
 .delay-4 {
 	animation-delay: 0.4s;
 }
+
+/* Simple SEO Service Pages */
+
+.seo-hero {
+    padding: 150px 0 70px;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.seo-hero-inner {
+    max-width: 850px;
+}
+
+.seo-hero h1 {
+    font-size: clamp(42px, 6vw, 68px);
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.seo-hero p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin-bottom: 34px;
+    line-height: 1.8;
+}
+
+.seo-content {
+    padding: 80px 0;
+    background: var(--bg-card);
+}
+
+.seo-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 50px;
+    align-items: start;
+}
+
+.seo-main {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    padding: 44px;
+}
+
+.seo-main h2 {
+    font-size: 34px;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+
+.seo-main p {
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    line-height: 1.8;
+}
+
+.seo-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+}
+
+.seo-list li {
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.seo-sidebar {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    padding: 28px;
+    position: sticky;
+    top: 100px;
+}
+
+.seo-sidebar h3 {
+    font-size: 24px;
+    color: var(--gold-light);
+    margin-bottom: 18px;
+}
+
+.seo-sidebar a {
+    display: block;
+    padding: 12px 0;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.seo-sidebar a:hover {
+    color: var(--gold-light);
+    padding-left: 8px;
+}
+
+.seo-cta-simple {
+    padding: 70px 0;
+    background: var(--bg-dark);
+    text-align: center;
+}
+
+.seo-cta-simple h2 {
+    font-size: clamp(34px, 4vw, 48px);
+    margin-bottom: 16px;
+}
+
+.seo-cta-simple p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .seo-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .seo-main {
+        padding: 32px 24px;
+    }
+
+    .seo-list {
+        grid-template-columns: 1fr;
+    }
+
+    .seo-sidebar {
+        position: static;
+    }
+}
