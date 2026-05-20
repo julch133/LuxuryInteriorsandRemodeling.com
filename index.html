@@ -11,46 +11,7 @@
     
 </head>
 
-<script>
-const contactForm = document.getElementById("contactForm");
-const formStatus = document.getElementById("formStatus");
 
-contactForm.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const scriptURL = "PASTE_YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE";
-
-    const formData = {
-        firstName: document.getElementById("firstName").value.trim(),
-        lastName: document.getElementById("lastName").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        message: document.getElementById("message").value.trim()
-    };
-
-    formStatus.style.display = "block";
-    formStatus.textContent = "Sending message...";
-
-    try {
-        await fetch(scriptURL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        });
-
-        formStatus.textContent = "Thank you. Your message has been sent.";
-        contactForm.reset();
-
-    } catch (error) {
-        formStatus.textContent = "Something went wrong. Please call or email us directly.";
-        console.error("Contact form error:", error);
-    }
-});
-</script>
-    
 <body>
     <!-- Navigation -->
     <nav class="nav" id="navbar">
@@ -622,5 +583,54 @@ contactForm.addEventListener("submit", async function(event) {
     </footer>
 
 <script src="templatemo-aurum-script.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+
+    if (!contactForm) {
+        console.error("Contact form not found.");
+        return;
+    }
+
+    contactForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyimsdSM9eCvtFlAfaqMxgiFq_jPCq-X9a3lUu_DOM0op5fd5T6TZd8Kt9QsB7PH5cwrw/exec";
+
+        const formData = {
+            firstName: document.getElementById("firstName").value.trim(),
+            lastName: document.getElementById("lastName").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            message: document.getElementById("message").value.trim()
+        };
+
+        formStatus.style.display = "block";
+        formStatus.textContent = "Sending message...";
+
+        try {
+            await fetch(scriptURL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            formStatus.textContent = "Thank you. Your message has been sent.";
+            contactForm.reset();
+
+        } catch (error) {
+            formStatus.textContent = "Something went wrong. Please call or email us directly.";
+            console.error("Contact form error:", error);
+        }
+    });
+});
+</script>
+
+<script src="templatemo-aurum-script.js"></script>
+</body>
 </body>
 </html>
