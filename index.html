@@ -589,8 +589,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     contactForm.addEventListener("submit", async function(event) {
         event.preventDefault();
-
-        const scriptURL = "https://script.google.com/macros/s/AKfycbyEoxS_Ji6BiZCHISyj4Srbgx7IlN8fjCJnvHGygO5Xa6nUuAe2wDf1f0BqWw3xe7LWwA/exec";
+        
+        const scriptURL = "https://script.google.com/macros/s/AKfycbzyJG-Fn9vCzHk1zRHc6zMUrGRru0fRwXn1R0f4_0NGejKn3KJxcvy_COoyqVpIhhEpkg/exec";
 
         const payload = {
             firstName: document.getElementById("firstName").value.trim(),
@@ -602,28 +602,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
         formStatus.style.display = "block";
         formStatus.textContent = "Sending message...";
+        formStatus.style.color = "black";
 
         try {
-            await fetch(scriptURL, {
+            const response = await fetch(scriptURL, {
                 method: "POST",
-                mode: "no-cors",
                 headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(payload)
             });
 
-            formStatus.textContent = "Thank you. Your message has been sent.";
+            // Even if we can't read the response easily, we assume success if no error
+            formStatus.textContent = "Thank you! Your message has been sent.";
+            formStatus.style.color = "green";
             contactForm.reset();
 
         } catch (error) {
-            formStatus.textContent = "Something went wrong. Please call or email us directly.";
             console.error("Contact form error:", error);
+            formStatus.textContent = "Something went wrong. Please call or email us directly.";
+            formStatus.style.color = "red";
         }
     });
 });
 </script>
-
 
 <script src="templatemo-aurum-script.js"></script>
 </body>
