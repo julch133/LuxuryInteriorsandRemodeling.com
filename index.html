@@ -488,36 +488,25 @@
                     </ul>
                 </div>
 
-
-<form id="contactForm">
-  <input type="text" name="firstName" placeholder="First Name" required>
-  <input type="text" name="lastName" placeholder="Last Name">
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="tel" name="phone" placeholder="Phone">
-  <textarea name="message" placeholder="Message" required></textarea>
-
-  <button type="submit">Send Message</button>
-</form>
-
                 
                <div class="contact-form-wrapper">
     <form class="contact-form" id="contactForm">
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="firstName">First Name</label>
-                <input type="text" name="firstName" placeholder="John" required>
+                 <input class="form-input" id="firstName" name="firstName" type="text" placeholder="John" required>
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="lastName">Last Name</label>
-                <input type="text" name="lastName" placeholder="Smith" required>
+                <input class="form-input" id="firstName" type="text" name="lastName" placeholder="Smith" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="email">Email Address</label>
-                <input type="email" name="email" placeholder="john@example.com" required>
+                <input class="form-input" id="lastName" type="email" name="email" placeholder="john@example.com" required>
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
@@ -599,7 +588,7 @@
 <script src="templatemo-aurum-script.js"></script>
             <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9xAd_9w9FrRxf7-Lf5dWrU025PTDWfXil9h0jaq35zZeYrWk4_bAS-q-yvp0qganRFQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwG4FVWoqbFBbuD1ozuaCuDaX6nt3a_BjQjIJ3JTJ9klJ3Vl7shwCYwHaYzHi-y6KBa5A/exec";
 
     const form = document.getElementById("contactForm");
     const btn = document.getElementById("submitButton");
