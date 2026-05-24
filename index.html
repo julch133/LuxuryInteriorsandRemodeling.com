@@ -519,6 +519,20 @@
       <label class="form-label" for="message">Message</label>
       <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you need done, where the project is located, and your ideal timeline..." required></textarea>
     </div>
+    <div class="form-group">
+      <label class="form-label" for="attachments">Project Photos</label>
+  <input
+    class="form-input"
+    id="attachments"
+    name="attachments"
+    type="file"
+    accept="image/*"
+    multiple
+  >
+  <small style="display:block; margin-top: 8px; color: inherit; opacity: 0.75;">
+    You can upload multiple pictures of your project.
+  </small>
+</div>
 
     <button type="button" id="submitButton" class="btn btn-primary form-submit">Send Message</button>
     <p id="formStatus" style="display:none; margin-top: 15px;"></p>
@@ -570,13 +584,35 @@
     </footer>
 
 
-<script src="templatemo-aurum-script.js"></script>
-         <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbR4uRVTldKPz4qs2qZsy2BUGhxI-rWQcMYmsOPFi3bk4gc8v-vhR3l9sef-zEFg64Lg/exec";
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUYzUr6EZmJyI-uRTlhzD8bTLHqgJfegMgXyhgPvDPtTZf16l6O8LR_VExlNBivqS51Q/exec";
 
   const form = document.getElementById("contactForm");
   const btn = document.getElementById("submitButton");
   const status = document.getElementById("formStatus");
+
+  const MAX_FILES = 5;
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB each
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64 = reader.result.split(",")[1];
+
+        resolve({
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: base64
+        });
+      };
+
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
   btn.addEventListener("click", async function () {
     if (!form.checkValidity()) {
@@ -584,21 +620,37 @@
       return;
     }
 
+    const files = Array.from(form.elements["attachments"].files || []);
+
+    if (files.length > MAX_FILES) {
+      alert(`Please upload no more than ${MAX_FILES} pictures.`);
+      return;
+    }
+
+    const oversizedFile = files.find(file => file.size > MAX_FILE_SIZE);
+    if (oversizedFile) {
+      alert(`${oversizedFile.name} is too large. Please keep each file under 5MB.`);
+      return;
+    }
+
     btn.disabled = true;
     const oldText = btn.textContent;
     btn.textContent = "Sending...";
 
-    const payload = {
-      firstName: form.elements["firstName"].value.trim(),
-      lastName: form.elements["lastName"].value.trim(),
-      email: form.elements["email"].value.trim(),
-      phone: form.elements["phone"].value.trim(),
-      message: form.elements["message"].value.trim(),
-      page: window.location.origin + window.location.pathname,
-      userAgent: navigator.userAgent
-    };
-
     try {
+      const attachments = await Promise.all(files.map(fileToBase64));
+
+      const payload = {
+        firstName: form.elements["firstName"].value.trim(),
+        lastName: form.elements["lastName"].value.trim(),
+        email: form.elements["email"].value.trim(),
+        phone: form.elements["phone"].value.trim(),
+        message: form.elements["message"].value.trim(),
+        attachments,
+        page: window.location.origin + window.location.pathname,
+        userAgent: navigator.userAgent
+      };
+
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
