@@ -585,7 +585,7 @@
 
 
 <script src="templatemo-aurum-script.js"></script>
-          <script>
+         <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUxoG_ZrRBmSsRFRJOgzWO15hiLailVDlsmaqIxdRpZov_58smCtOz6G_46ov1rLPtDg/exec";
 
   const form = document.getElementById("contactForm");
@@ -612,38 +612,29 @@
       userAgent: navigator.userAgent
     };
 
-    console.log("Sending payload:", payload);
-
     try {
-      const res = await fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Content-Type": "text/plain;charset=utf-8"
         },
         body: JSON.stringify(payload)
       });
 
-      const text = await res.text();
-      console.log("Google Script response:", text);
+      btn.textContent = "Sent!";
+      form.reset();
 
-      const data = JSON.parse(text);
-
-      if (data.ok === true) {
-        btn.textContent = "Sent!";
-        form.reset();
-
-        if (status) {
-          status.style.display = "block";
-          status.textContent = "Thank you! Your message has been sent.";
-        }
-
-        setTimeout(() => {
-          btn.textContent = oldText;
-          btn.disabled = false;
-        }, 2500);
-      } else {
-        throw new Error(data.error || "Google Script returned an error");
+      if (status) {
+        status.style.display = "block";
+        status.textContent = "Thank you! Your message has been sent.";
       }
+
+      setTimeout(() => {
+        btn.textContent = oldText;
+        btn.disabled = false;
+      }, 2500);
+
     } catch (err) {
       console.error("Form submit error:", err);
       alert("Something went wrong sending your message. Please try again or contact us directly.");
