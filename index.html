@@ -584,13 +584,13 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const contactForm = document.getElementById("contactForm");
-    const formStatus = document.getElementById("formStatus");
+    const form = document.getElementById("contactForm");
+    const status = document.getElementById("formStatus");
 
-    contactForm.addEventListener("submit", async function(event) {
-        event.preventDefault();
-        
-        const scriptURL = "https://script.google.com/macros/library/d/1rbqckiqG_tcUYzrGHV5e_Exa5Qu9X86yTZabamn8mG9QGWRjBtFOUYT5/7";
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwwlRbA9QBzmsK1KImrBxd0GDwCLy06HrQTa-b-fo4Q9dY5-Al2qbhzEKhbvaAcflaHSQ/exec";
 
         const formData = new FormData();
         formData.append("firstName", document.getElementById("firstName").value.trim());
@@ -599,9 +599,9 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("phone",     document.getElementById("phone").value.trim());
         formData.append("message",   document.getElementById("message").value.trim());
 
-        formStatus.style.display = "block";
-        formStatus.style.color = "#333";
-        formStatus.textContent = "Sending message...";
+        status.style.display = "block";
+        status.style.color = "black";
+        status.textContent = "Sending...";
 
         try {
             await fetch(scriptURL, {
@@ -609,14 +609,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: formData
             });
 
-            formStatus.style.color = "green";
-            formStatus.textContent = "Thank you! Your message has been sent.";
-            contactForm.reset();
+            status.style.color = "green";
+            status.textContent = "Thank you! Your message has been sent.";
+            form.reset();
 
-        } catch (error) {
-            console.error("Form error:", error);
-            formStatus.style.color = "red";
-            formStatus.textContent = "Something went wrong. Please call us at 731-400-2406";
+        } catch (err) {
+            console.error(err);
+            status.style.color = "red";
+            status.textContent = "Failed to send. Please call 731-400-2406";
         }
     });
 });
