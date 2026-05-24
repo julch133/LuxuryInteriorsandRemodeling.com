@@ -490,40 +490,41 @@
 
                 
                <div class="contact-form-wrapper">
-    <form class="contact-form" id="contactForm">
-        <div class="form-row">
-            <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label" for="firstName">First Name</label>
-                 <input class="form-input" id="firstName" name="firstName" type="text" placeholder="John" required>
-            </div>
+   <div class="contact-form-wrapper">
+  <form class="contact-form" id="contactForm">
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label class="form-label" for="firstName">First Name</label>
+        <input class="form-input" id="firstName" name="firstName" type="text" placeholder="John" required>
+      </div>
 
-            <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label" for="lastName">Last Name</label>
-                <input class="form-input" id="firstName" type="text" name="lastName" placeholder="Smith" required>
-            </div>
-        </div>
+      <div class="form-group" style="margin-bottom: 0;">
+        <label class="form-label" for="lastName">Last Name</label>
+        <input class="form-input" id="lastName" name="lastName" type="text" placeholder="Smith" required>
+      </div>
+    </div>
 
-        <div class="form-row">
-            <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label" for="email">Email Address</label>
-                <input class="form-input" id="lastName" type="email" name="email" placeholder="john@example.com" required>
-            </div>
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-input" id="email" name="email" type="email" placeholder="john@example.com" required>
+      </div>
 
-            <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label" for="phone">Phone Number</label>
-                <input type="tel" class="form-input" id="phone" name="phone" placeholder="+1 (555) 000-0000">
-            </div>
-        </div>
+      <div class="form-group" style="margin-bottom: 0;">
+        <label class="form-label" for="phone">Phone Number</label>
+        <input class="form-input" id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000">
+      </div>
+    </div>
 
-        <div class="form-group">
-            <label class="form-label" for="message">Message</label>
-            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you need done, where the project is located, and your ideal timeline..." required></textarea>
-        </div>
+    <div class="form-group">
+      <label class="form-label" for="message">Message</label>
+      <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you need done, where the project is located, and your ideal timeline..." required></textarea>
+    </div>
 
-        <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+    <button type="submit" id="submitButton" class="btn btn-primary form-submit">Send Message</button>
 
-        <p id="formStatus" style="display:none; margin-top: 15px;"></p>
-    </form>
+    <p id="formStatus" style="display:none; margin-top: 15px;"></p>
+  </form>
 </div>
             </div>
         </div>
@@ -588,7 +589,7 @@
 <script src="templatemo-aurum-script.js"></script>
             <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwG4FVWoqbFBbuD1ozuaCuDaX6nt3a_BjQjIJ3JTJ9klJ3Vl7shwCYwHaYzHi-y6KBa5A/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUxoG_ZrRBmSsRFRJOgzWO15hiLailVDlsmaqIxdRpZov_58smCtOz6G_46ov1rLPtDg/exec";
 
     const form = document.getElementById("contactForm");
     const btn = document.getElementById("submitButton");
