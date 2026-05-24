@@ -490,8 +490,8 @@
 
                 
    <div class="contact-form-wrapper">
-    <form class="contact-form" id="contactForm" method="post" action="javascript:void(0);">
-       <div class="form-row">
+    <form class="contact-form" id="contactForm" onsubmit="return false;">
+    <div class="form-row">
       <div class="form-group" style="margin-bottom: 0;">
         <label class="form-label" for="firstName">First Name</label>
         <input class="form-input" id="firstName" name="firstName" type="text" placeholder="John" required>
@@ -520,8 +520,7 @@
       <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you need done, where the project is located, and your ideal timeline..." required></textarea>
     </div>
 
-    <button type="submit" id="submitButton" class="btn btn-primary form-submit">Send Message</button>
-
+    <button type="button" id="submitButton" class="btn btn-primary form-submit">Send Message</button>
     <p id="formStatus" style="display:none; margin-top: 15px;"></p>
   </form>
 </div>
@@ -586,32 +585,34 @@
 
 
 <script src="templatemo-aurum-script.js"></script>
-           <script>
+          <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUxoG_ZrRBmSsRFRJOgzWO15hiLailVDlsmaqIxdRpZov_58smCtOz6G_46ov1rLPtDg/exec";
 
   const form = document.getElementById("contactForm");
   const btn = document.getElementById("submitButton");
   const status = document.getElementById("formStatus");
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    e.stopPropagation();
+  btn.addEventListener("click", async function () {
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     btn.disabled = true;
     const oldText = btn.textContent;
     btn.textContent = "Sending...";
 
-    const formData = new FormData(form);
-
     const payload = {
-      firstName: formData.get("firstName") || "",
-      lastName: formData.get("lastName") || "",
-      email: formData.get("email") || "",
-      phone: formData.get("phone") || "",
-      message: formData.get("message") || "",
+      firstName: form.elements["firstName"].value.trim(),
+      lastName: form.elements["lastName"].value.trim(),
+      email: form.elements["email"].value.trim(),
+      phone: form.elements["phone"].value.trim(),
+      message: form.elements["message"].value.trim(),
       page: window.location.origin + window.location.pathname,
       userAgent: navigator.userAgent
     };
+
+    console.log("Sending payload:", payload);
 
     try {
       const res = await fetch(SCRIPT_URL, {
@@ -623,6 +624,8 @@
       });
 
       const text = await res.text();
+      console.log("Google Script response:", text);
+
       const data = JSON.parse(text);
 
       if (data.ok === true) {
@@ -639,10 +642,10 @@
           btn.disabled = false;
         }, 2500);
       } else {
-        throw new Error(data.error || "Unknown error");
+        throw new Error(data.error || "Google Script returned an error");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Form submit error:", err);
       alert("Something went wrong sending your message. Please try again or contact us directly.");
       btn.textContent = oldText;
       btn.disabled = false;
