@@ -488,7 +488,7 @@
                     </ul>
                 </div>
                <div class="contact-form-wrapper">
-    <form class="contact-form" id="contactForm">
+    <form class="contact-form" id="contactForm" method="POST" action="#">
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="firstName">First Name</label>
@@ -587,10 +587,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contactForm");
     const status = document.getElementById("formStatus");
 
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
+    if (!form) {
+        console.error("Contact form not found!");
+        return;
+    }
 
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwlFgeUO4XsJaE4lHstAI3dUN-UfUUKLWh-O7ITjXH7JP3Al7QJi3S6gFwjYXvAwT1wqg/exec";
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();   // This is critical
+
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyEoxS_Ji6BiZCHISyj4Srbgx7IlN8fjCJnvHGygO5Xa6nUuAe2wDf1f0BqWw3xe7LWwA/exec";
 
         const formData = new FormData();
         formData.append("firstName", document.getElementById("firstName").value.trim());
@@ -600,21 +605,20 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("message",   document.getElementById("message").value.trim());
 
         status.style.display = "block";
-        status.style.color = "black";
+        status.style.color = "#28a745";
         status.textContent = "Sending...";
 
         try {
-            await fetch(scriptURL, {
+            const response = await fetch(scriptURL, {
                 method: "POST",
                 body: formData
             });
 
-            status.style.color = "green";
             status.textContent = "Thank you! Your message has been sent.";
             form.reset();
 
         } catch (err) {
-            console.error(err);
+            console.error("Submit error:", err);
             status.style.color = "red";
             status.textContent = "Failed to send. Please call 731-400-2406";
         }
