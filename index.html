@@ -487,24 +487,37 @@
                         </li>
                     </ul>
                 </div>
+
+
+<form id="contactForm">
+  <input type="text" name="firstName" placeholder="First Name" required>
+  <input type="text" name="lastName" placeholder="Last Name">
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="phone" placeholder="Phone">
+  <textarea name="message" placeholder="Message" required></textarea>
+
+  <button type="submit">Send Message</button>
+</form>
+
+                
                <div class="contact-form-wrapper">
     <form class="contact-form" id="contactForm">
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="firstName">First Name</label>
-                <input class="form-control custom-input" id="firstName" name="firstName" type="text" placeholder="John" required>
+                <input type="text" name="firstName" placeholder="John" required>
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="lastName">Last Name</label>
-                <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Smith" required>
+                <input type="text" name="lastName" placeholder="Smith" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="email">Email Address</label>
-                <input type="email" class="form-input" id="email" name="email" placeholder="john@example.com" required>
+                <input type="email" name="email" placeholder="john@example.com" required>
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
