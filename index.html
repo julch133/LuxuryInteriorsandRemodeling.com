@@ -586,68 +586,67 @@
 
 
 <script src="templatemo-aurum-script.js"></script>
-            <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzyB99QCEzUZFiZyf4m6I7Pv8EilPSCadJYv5ciUsr1GO6ZwS7ZQAotuLEQeJ8G8XQ/exec";
+           <script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUxoG_ZrRBmSsRFRJOgzWO15hiLailVDlsmaqIxdRpZov_58smCtOz6G_46ov1rLPtDg/exec";
 
-    const form = document.getElementById("contactForm");
-    const btn = document.getElementById("submitButton");
-    if (!form || !btn) return;
+  const form = document.getElementById("contactForm");
+  const btn = document.getElementById("submitButton");
+  const status = document.getElementById("formStatus");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-      btn.disabled = true;
-      const oldText = btn.textContent;
-      btn.textContent = "Sending...";
+    btn.disabled = true;
+    const oldText = btn.textContent;
+    btn.textContent = "Sending...";
 
-      const payload = {
-        firstName: document.getElementById("firstName")?.value || "",
-        lastName: document.getElementById("lastName")?.value || "",
-        email: document.getElementById("email")?.value || "",
-        phone: document.getElementById("phone")?.value || "",
-        message: document.getElementById("message")?.value || "",
-        page: window.location.href,
-        userAgent: navigator.userAgent
-      };
+    const formData = new FormData(form);
 
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload),
-        });
+    const payload = {
+      firstName: formData.get("firstName") || "",
+      lastName: formData.get("lastName") || "",
+      email: formData.get("email") || "",
+      phone: formData.get("phone") || "",
+      message: formData.get("message") || "",
+      page: window.location.origin + window.location.pathname,
+      userAgent: navigator.userAgent
+    };
 
-       const text = await res.text();
-let data;
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
 
-try {
-  data = JSON.parse(text);
-} catch {
-  data = { ok: false, raw: text };
-}
+      const text = await res.text();
+      const data = JSON.parse(text);
 
-if (res.ok && data.ok === true) {
-  btn.textContent = "Sent ✓";
-  form.reset();
-  setTimeout(() => {
-    btn.textContent = oldText;
-    btn.disabled = false;
-  }, 2500);
-} else {
-  console.error("HTTP status:", res.status);
-  console.error("Raw response:", text);
-  alert("Something went wrong sending your message. Try again. Or contact us directly");
-  btn.textContent = oldText;
-  btn.disabled = false;
-}
-      } catch (err) {
-        console.error(err);
-        alert("Network error. Try again.");
-        btn.textContent = oldText;
-        btn.disabled = false;
+      if (data.ok === true) {
+        btn.textContent = "Sent!";
+        form.reset();
+
+        if (status) {
+          status.style.display = "block";
+          status.textContent = "Thank you! Your message has been sent.";
+        }
+
+        setTimeout(() => {
+          btn.textContent = oldText;
+          btn.disabled = false;
+        }, 2500);
+      } else {
+        throw new Error(data.error || "Unknown error");
       }
-    });
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong sending your message. Please try again or contact us directly.");
+      btn.textContent = oldText;
+      btn.disabled = false;
+    }
   });
 </script>
 </body>
