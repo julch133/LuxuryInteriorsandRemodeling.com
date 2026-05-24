@@ -488,7 +488,7 @@
                     </ul>
                 </div>
                <div class="contact-form-wrapper">
-    <form class="contact-form" id="contactForm" method="POST" action="#">
+    <form class="contact-form" id="contactForm">
         <div class="form-row">
             <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="firstName">First Name</label>
@@ -582,41 +582,6 @@
         </div>
     </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contactForm");
-    const status = document.getElementById("formStatus");
-
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const scriptURL = "https://script.google.com/macros/s/AKfycbyavJ4fE3t-ZKIIbIbZR2oFehRo0qDRc2SYNdvlVLs_fSj3-vRGqT_nKuYxLU3ZNuEK1A/exec";
-
-        const formData = new FormData();
-        formData.append("firstName", document.getElementById("firstName").value.trim());
-        formData.append("lastName", document.getElementById("lastName").value.trim());
-        formData.append("email", document.getElementById("email").value.trim());
-        formData.append("phone", document.getElementById("phone").value.trim());
-        formData.append("message", document.getElementById("message").value.trim());
-
-        status.style.display = "block";
-        status.style.color = "orange";
-        status.textContent = "Sending message...";
-
-        try {
-            await fetch(scriptURL, { method: "POST", body: formData });
-
-            status.style.color = "green";
-            status.textContent = "Thank you! Your message has been sent.";
-            form.reset();
-        } catch (err) {
-            console.error(err);
-            status.style.color = "red";
-            status.textContent = "Something went wrong. Please call 731-400-2406";
-        }
-    });
-});
-</script>
 
 <script src="templatemo-aurum-script.js"></script>
 </body>
