@@ -1795,3 +1795,26 @@ section {
         position: static;
     }
 }
+
+
+.service-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 24px 0 36px;
+}
+
+.service-list li {
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+}
