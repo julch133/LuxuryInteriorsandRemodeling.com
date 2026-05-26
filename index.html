@@ -8,7 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="templatemo-aurum-gold.css">
-    
+
+        <!-- Mobile redirect -->
+    <script>
+      (function () {
+        var wantsDesktop = new URLSearchParams(window.location.search).get("desktop") === "1";
+        var isMobile = window.matchMedia("(max-width: 767px)").matches ||
+          /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        var isAlreadyMobilePage = /index-mobile\.html$/i.test(window.location.pathname);
+
+        if (isMobile && !wantsDesktop && !isAlreadyMobilePage) {
+          window.location.replace("index-mobile.html");
+        }
+      }());
+    </script>
+</head>
 </head>
 
 
