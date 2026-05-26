@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Interiors and Remodeling | Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #11100f;
+      --charcoal: #1b1917;
+      --cream: #f8f3ea;
+      --soft: #eee4d4;
+      --gold: #c49a4a;
+      --gold-light: #e4c178;
+      --text: #f7f1e6;
+      --muted: #cfc2ac;
+      --line: rgba(228, 193, 120, 0.24);
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--black);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding-bottom: 82px;
+      background:
+        linear-gradient(180deg, rgba(17, 16, 15, 0.28), rgba(17, 16, 15, 0.98) 430px),
+        url("images/BeforeAfter.jpg") center top / cover no-repeat fixed,
+        var(--black);
+    }
+
+    .shell {
+      width: min(100% - 32px, 560px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(17, 16, 15, 0.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 66px;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .logo span {
+      display: block;
+      color: var(--gold-light);
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .menu-toggle {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      background: transparent;
+    }
+
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    .menu-toggle span::before {
+      transform: translateY(-7px);
+    }
+
+    .menu-toggle span::after {
+      transform: translateY(5px);
+    }
+
+    .drawer {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 10px 0 18px;
+      background: rgba(17, 16, 15, 0.98);
+    }
+
+    .drawer.open {
+      display: block;
+    }
+
+    .drawer a {
+      display: block;
+      padding: 13px 0;
+      color: var(--soft);
+      font-size: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+    }
+
+    .eyebrow {
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      line-height: 1.05;
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 11ch;
+      margin-top: 12px;
+      font-size: clamp(48px, 16vw, 74px);
+    }
+
+    h1 span,
+    h2 span {
+      color: var(--gold-light);
+    }
+
+    .hero p {
+      margin: 18px 0 0;
+      max-width: 36rem;
+      color: var(--soft);
+      font-size: 16px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 13px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .btn-primary {
+      color: #15110a;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      box-shadow: var(--shadow);
+    }
+
+    .btn-outline {
+      color: var(--gold-light);
+      background: rgba(17, 16, 15, 0.48);
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .stat,
+    .panel,
+    .card,
+    .contact-form,
+    .gallery-image {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(27, 25, 23, 0.88);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold-light);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin-top: 8px;
+      font-size: 36px;
+    }
+
+    .section-copy {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .panel h3 {
+      color: var(--gold-light);
+      font-size: 29px;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 0;
+    }
+
+    .benefit {
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .benefit:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .benefit strong {
+      display: block;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .benefit span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section-cta {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      display: block;
+      padding: 18px;
+    }
+
+    .card h3 {
+      color: var(--gold-light);
+      font-size: 25px;
+    }
+
+    .card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .why-list li {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .why-list b {
+      color: var(--gold-light);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+    }
+
+    .why-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .why-list span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+
+    .tab {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--soft);
+      background: rgba(27, 25, 23, 0.9);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .tab.active {
+      color: #15110a;
+      border-color: transparent;
+      background: var(--gold-light);
+    }
+
+    .gallery {
+      display: none;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .gallery.active {
+      display: grid;
+    }
+
+    .gallery-stage {
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .gallery-image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+
+    .gallery-image img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial {
+      margin: 0;
+      padding: 20px;
+      border-left: 3px solid var(--gold-light);
+      color: var(--soft);
+      background: rgba(27, 25, 23, 0.9);
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
+    }
+
+    .contact-details a,
+    .contact-details span {
+      display: block;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--soft);
+      background: rgba(27, 25, 23, 0.7);
+    }
+
+    .contact-details small {
+      display: block;
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-form {
+      padding: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--soft);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(228, 193, 120, 0.34);
+      border-radius: 8px;
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.24);
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input {
+      min-height: 48px;
+      padding: 11px 12px;
+    }
+
+    textarea {
+      min-height: 130px;
+      padding: 12px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(247, 241, 230, 0.5);
+    }
+
+    .form-help,
+    #formStatus {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      padding: 30px 0 98px;
+      color: var(--muted);
+      background: #0b0a09;
+    }
+
+    .footer a {
+      color: var(--gold-light);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--line);
+      background: rgba(17, 16, 15, 0.96);
+      backdrop-filter: blur(16px);
+    }
+
+    .sticky-cta .shell {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .sticky-cta .btn {
+      min-height: 48px;
+      padding-inline: 10px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 680px) {
+      .page {
+        background-attachment: scroll;
+      }
+
+      .actions,
+      .section-cta {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a href="#top" class="logo" aria-label="Luxury Interiors and Remodeling home">Luxury Interiors<span>and Remodeling</span></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+      <nav class="drawer" id="drawer" aria-label="Mobile navigation">
+        <div class="shell">
+          <a href="#services">Services</a>
+          <a href="#why-us">Why Us</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="shell">
+          <div class="eyebrow">Hardin County, TN</div>
+          <h1>Home <span>Remodeling</span> Contractor</h1>
+          <p>Elegant renovations, custom finishes, and high-end interior upgrades that turn your home into a space that feels refined, functional, and completely yours.</p>
+          <div class="actions">
+            <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+            <a href="tel:7314002406" class="btn btn-outline">Call 731-400-2406</a>
+          </div>
+          <div class="quick-stats" aria-label="Company highlights">
+            <div class="stat"><strong>15+</strong><span>Years Experience</span></div>
+            <div class="stat"><strong>BBB</strong><span>Accredited</span></div>
+            <div class="stat"><strong>5-Star</strong><span>Client-Focused Service</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="living-title">
+        <div class="shell">
+          <div class="panel">
+            <div class="eyebrow">Why Invest in Luxury Remodeling?</div>
+            <h2 id="living-title"><span>Elevated Living</span></h2>
+            <p class="section-copy">A well-designed interior improves how your home looks, feels, and functions every day.</p>
+            <div class="section-cta">
+              <a href="#contact" class="btn btn-primary">Request a Quote</a>
+              <a href="tel:7314002406" class="btn btn-outline">Tap to Call</a>
+            </div>
+            <div class="benefits">
+              <div class="benefit"><strong>Better Function</strong><span>Layouts and finishes designed around real daily use.</span></div>
+              <div class="benefit"><strong>Higher Value</strong><span>Quality remodeling can improve comfort, appeal, and long-term home value.</span></div>
+              <div class="benefit"><strong>Timeless Style</strong><span>Classic materials and thoughtful details that do not feel trendy next year.</span></div>
+              <div class="benefit"><strong>Personalized Design</strong><span>A home that reflects your taste instead of looking builder-basic.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">Our Services</div>
+            <h2>Complete Home Remodeling Solutions</h2>
+            <p class="section-copy">From small updates to full home renovations.</p>
+          </div>
+          <div class="cards">
+            <a class="card" href="services-kitchen.html"><h3>Kitchen Remodeling</h3><p>Custom cabinetry, countertops, lighting, flooring, and layout upgrades designed for a more beautiful and functional kitchen.</p></a>
+            <a class="card" href="services-bathroom.html"><h3>Bathroom Remodeling</h3><p>Spa-inspired bathrooms with tilework, vanities, fixtures, and finishes that feel clean, polished, and elevated.</p></a>
+            <a class="card" href="services-interior-upgrades.html"><h3>Interior Upgrades</h3><p>Flooring, trim, accent walls, built-ins, lighting, and finish details that bring your home together.</p></a>
+            <a class="card" href="services-whole-house.html"><h3>Full Home Renovations</h3><p>Coordinated remodeling for multiple rooms, helping create a cohesive look and better flow throughout your home.</p></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="why-us">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">Why Choose Us</div>
+            <h2>High End Renovations Without the Headache</h2>
+          </div>
+          <ul class="why-list">
+            <li><b>01</b><span><strong>Built Right the First Time</strong>Clean cuts, solid installs, level lines, tight finishes, and work that holds up after the photos are taken.</span></li>
+            <li><b>02</b><span><strong>Details That Actually Matter</strong>Trim, tile transitions, lighting placement, hardware, texture, and spacing that make a remodel feel premium.</span></li>
+            <li><b>03</b><span><strong>A Home That Still Feels Like Yours</strong>The goal is to upgrade your space so it looks elevated, works better, and fits the way you live.</span></li>
+            <li><b>04</b><span><strong>Respect for Your Time and Home</strong>Clear communication, organized work areas, realistic expectations, and a calmer job site.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">Our Projects</div>
+            <h2>Finished Spaces, Real Craftsmanship</h2>
+            <p class="section-copy">Explore recent remodeling work including kitchens, bathrooms, tile, built-ins, and full interior upgrades.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Project categories">
+            <button class="tab active" type="button" data-gallery="bathrooms">Bathrooms</button>
+            <button class="tab" type="button" data-gallery="kitchens">Kitchens</button>
+            <button class="tab" type="button" data-gallery="tile">Tile and Flooring</button>
+            <button class="tab" type="button" data-gallery="interiors">Interior Finish Work</button>
+          </div>
+          <div class="gallery-stage" id="galleryStage">
+            <div class="gallery active" id="gallery-bathrooms">
+              <div class="gallery-image"><img src="images/Bathroom001.jpg" alt="Finished bathroom remodel"></div>
+              <div class="gallery-image"><img src="images/Bathroom002.jpg" alt="Bathroom tile and fixtures"></div>
+              <div class="gallery-image"><img src="images/Bathroom007.jpg" alt="Updated bathroom shower"></div>
+              <div class="gallery-image"><img src="images/Bathroom006.jpg" alt="Bathroom remodel detail"></div>
+            </div>
+            <div class="gallery" id="gallery-kitchens">
+              <div class="gallery-image"><img src="images/Kitchen002.jpg" alt="Kitchen remodeling project"></div>
+              <div class="gallery-image"><img src="images/Kitchen003.jpg" alt="Kitchen cabinetry and counters"></div>
+              <div class="gallery-image"><img src="images/Kitchen004.png" alt="Kitchen upgrade"></div>
+              <div class="gallery-image"><img src="images/Kitchen005.jpg" alt="Finished kitchen renovation"></div>
+            </div>
+            <div class="gallery" id="gallery-tile">
+              <div class="gallery-image"><img src="images/TileFlooring001.png" alt="Tile and flooring work"></div>
+              <div class="gallery-image"><img src="images/TileFlooring002.png" alt="Flooring installation"></div>
+              <div class="gallery-image"><img src="images/TileFlooring003.png" alt="Tile work detail"></div>
+              <div class="gallery-image"><img src="images/TileFlooring004.png" alt="Finished flooring project"></div>
+            </div>
+            <div class="gallery" id="gallery-interiors">
+              <div class="gallery-image"><img src="images/WholeHouse001.png" alt="Whole house renovation"></div>
+              <div class="gallery-image"><img src="images/WholeHouse002.png" alt="Interior finish work"></div>
+              <div class="gallery-image"><img src="images/WholeHouse003.png" alt="Home remodeling project"></div>
+              <div class="gallery-image"><img src="images/WholeHouse004.png" alt="Interior upgrade"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">Client Stories</div>
+            <h2>Trusted by Your Neighbors. Built for Your Home.</h2>
+          </div>
+          <blockquote class="testimonial">"Luis is awesome, extremely professional, a very good craftsman, knows all the remodeling trades. He redid the interior of my house and it looks beautiful. Honest and dependable."</blockquote>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="shell">
+          <div class="section-head">
+            <div class="eyebrow">Contact Us</div>
+            <h2>Let's Discuss Your Home Goals</h2>
+            <p class="section-copy">Tell us what you have in mind, and we will help you plan the next step toward a home that feels finished, functional, and built around you.</p>
+          </div>
+          <div class="contact-grid">
+            <div>
+              <ul class="contact-details">
+                <li><a href="tel:7314002406"><small>Phone</small>+1 (731) 400-2406</a></li>
+                <li><a href="mailto:LuxuryInteriors.AL@gmail.com"><small>Email</small>LuxuryInteriors.AL@gmail.com</a></li>
+                <li><span><small>Service Area</small>Hardin County, TN, and surrounding areas</span></li>
+                <li><span><small>Business Hours</small>Mon - Fri: 9:00 AM - 6:00 PM CST<br>Sat: 10:00 AM - 2:00 PM CST</span></li>
+              </ul>
+            </div>
+            <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" name="firstName" type="text" placeholder="John" autocomplete="given-name" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" name="lastName" type="text" placeholder="Smith" autocomplete="family-name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" placeholder="john@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+              <div class="form-group">
+                <label for="message">Project Details</label>
+                <textarea id="message" name="message" placeholder="Tell us what you need done, where the project is located, and your ideal timeline..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="attachments">Project Photos</label>
+                <input id="attachments" name="attachments" type="file" accept="image/*" multiple>
+                <span class="form-help">You can upload up to 5 pictures, 5MB each.</span>
+              </div>
+              <button type="submit" id="submitButton" class="btn btn-primary" style="width:100%;">Send Message</button>
+              <p id="formStatus" style="display:none;"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="shell">
+      <a href="#top" class="logo">Luxury Interiors<span>and Remodeling</span></a>
+      <p>Quality remodeling in Hardin County, TN and surrounding areas.</p>
+      <ul class="footer-links">
+        <li><a href="index.html?desktop=1">Desktop View</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="SEO/service-areas.html">Service Areas</a></li>
+        <li><a href="https://www.facebook.com/share/1aiECk8Dze/" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+      <p>&copy; 2026. All rights reserved. Design by <a href="https://JessicaUlch.com" target="_blank" rel="noopener">NotYourAverageTech</a></p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" aria-label="Quick contact actions">
+    <div class="shell">
+      <a href="#contact" class="btn btn-primary">Get Quote</a>
+      <a href="tel:7314002406" class="btn btn-outline">Call Now</a>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDMrt5Bhag-wQTifyu5fhKuvlWA2iva2JYDOFgWMogAWesqxK-vAFJII5BGyLnM5NxKA/exec";
+
+    const menuToggle = document.getElementById("menuToggle");
+    const drawer = document.getElementById("drawer");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = drawer.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    drawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        drawer.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const galleryTabs = Array.from(document.querySelectorAll(".tab"));
+    const galleries = Array.from(document.querySelectorAll(".gallery"));
+    const galleryStage = document.getElementById("galleryStage");
+    let activeGalleryIndex = 0;
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+
+    function showGallery(index) {
+      activeGalleryIndex = (index + galleryTabs.length) % galleryTabs.length;
+      const gallery = galleryTabs[activeGalleryIndex].dataset.gallery;
+
+      galleryTabs.forEach((button) => button.classList.remove("active"));
+      galleries.forEach((item) => item.classList.remove("active"));
+
+      galleryTabs[activeGalleryIndex].classList.add("active");
+      galleryTabs[activeGalleryIndex].scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+      });
+      document.getElementById(`gallery-${gallery}`).classList.add("active");
+    }
+
+    galleryTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        showGallery(index);
+      });
+    });
+
+    galleryStage.addEventListener("touchstart", (event) => {
+      swipeStartX = event.touches[0].clientX;
+      swipeStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    galleryStage.addEventListener("touchend", (event) => {
+      const swipeEndX = event.changedTouches[0].clientX;
+      const swipeEndY = event.changedTouches[0].clientY;
+      const deltaX = swipeEndX - swipeStartX;
+      const deltaY = swipeEndY - swipeStartY;
+
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) {
+        return;
+      }
+
+      showGallery(activeGalleryIndex + (deltaX < 0 ? 1 : -1));
+    });
+
+    const form = document.getElementById("contactForm");
+    const btn = document.getElementById("submitButton");
+    const status = document.getElementById("formStatus");
+    const MAX_FILES = 5;
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          resolve({
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            data: reader.result.split(",")[1]
+          });
+        };
+
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const files = Array.from(form.elements.attachments.files || []);
+
+      if (files.length > MAX_FILES) {
+        alert(`Please upload no more than ${MAX_FILES} pictures.`);
+        return;
+      }
+
+      const oversizedFile = files.find((file) => file.size > MAX_FILE_SIZE);
+      if (oversizedFile) {
+        alert(`${oversizedFile.name} is too large. Please keep each file under 5MB.`);
+        return;
+      }
+
+      btn.disabled = true;
+      const oldText = btn.textContent;
+      btn.textContent = "Sending...";
+
+      try {
+        const attachments = await Promise.all(files.map(fileToBase64));
+        const payload = {
+          firstName: form.elements.firstName.value.trim(),
+          lastName: form.elements.lastName.value.trim(),
+          email: form.elements.email.value.trim(),
+          phone: form.elements.phone.value.trim(),
+          message: form.elements.message.value.trim(),
+          attachments,
+          page: window.location.origin + window.location.pathname,
+          userAgent: navigator.userAgent
+        };
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        form.reset();
+        btn.textContent = "Sent!";
+        status.style.display = "block";
+        status.textContent = "Thank you! Your message has been sent.";
+
+        setTimeout(() => {
+          btn.textContent = oldText;
+          btn.disabled = false;
+        }, 2500);
+      } catch (err) {
+        console.error("Form submit error:", err);
+        alert("Something went wrong sending your message. Please try again or contact us directly.");
+        btn.textContent = oldText;
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
